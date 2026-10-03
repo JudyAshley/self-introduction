@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人介绍 | 于湘怡</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#94b8e0',
+                        primaryLight: '#b8d2f0',
+                        primaryDark: '#6b99cc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                background: rgba(255,255,255,0.65);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255,255,255,0.75);
+            }
+            .glass-dark {
+                background: rgba(17,24,39,0.65);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border:1px solid rgba(255,255,255,0.1);
+            }
+            .fade-in {
+                opacity:0;
+                transform: translateY(24px);
+                transition: all 0.6s ease-out;
+            }
+            .fade-in.active {
+                opacity:1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .timeline-item::before {
+            content:"";
+            position:absolute;
+            left:-28px;
+            top:8px;
+            width:14px;
+            height:14px;
+            border-radius:999px;
+            background:#94b8e0;
+        }
+        .timeline-line {
+            position:absolute;
+            left:-21px;
+            top:22px;
+            width:2px;
+            height:calc(100% - 22px);
+            background:#cad9ec;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 transition-colors duration-300">
+    <!-- 导航栏 -->
+    <nav class="glass dark:glass-dark fixed w-full top-0 z-50 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <span class="text-xl font-semibold">个人主页</span>
+            <div class="flex gap-6 items-center">
+                <a href="#about" class="hover:text-primaryDark transition">关于我</a>
+                <a href="#experience" class="hover:text-primaryDark transition">个人经历</a>
+                <a href="#research" class="hover:text-primaryDark transition">科研经历</a>
+                <a href="#award" class="hover:text-primaryDark transition">奖项荣誉</a>
+                <a href="#studentwork" class="hover:text-primaryDark transition">学生工作经历</a>
+                <a href="#skill" class="hover:text-primaryDark transition">个人技能</a>
+                <a href="#contact" class="hover:text-primaryDark transition">联系我</a>
+                <button id="themeBtn" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">
+                    <i class="fa fa-moon-o dark:hidden"></i>
+                    <i class="fa fa-sun-o hidden dark:inline"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-4 md:px-6 max-w-6xl mx-auto">
+        <!-- 关于我 -->
+        <section id="about" class="fade-in mb-20">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-1">
+                    <div class="glass dark:glass-dark rounded-2xl p-4 overflow-hidden">
+                        <img src="images/photo1.jpg" alt="个人照片" class="w-full rounded-xl">
+                    </div>
+                    <div class="glass dark:glass-dark rounded-2xl p-4 mt-4 overflow-hidden">
+                        <img src="images/photo2.jpg" alt="个人照片" class="w-full rounded-xl">
+                    </div>
+                </div>
+                <div class="md:col-span-2 glass dark:glass-dark rounded-2xl p-8">
+                    <h2 class="text-3xl font-bold mb-4">于湘怡</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 mb-4">爱好：游泳，羽毛球，做手工制品，编曲<br>特长：播音主持，古筝</p>
+                    <h3 class="text-xl font-semibold mt-6 mb-2">教育背景</h3>
+                    <p>本科，华南农业大学 农学（丁颖创新班）</p>
+                    <h3 class="text-xl font-semibold mt-6 mb-2">研究方向</h3>
+                    <p>水稻抗逆、种子萌发调控、纳米生物刺激素</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 个人经历 时间轴 -->
+        <section id="experience" class="fade-in mb-20">
+            <h2 class="text-2xl font-bold mb-10">个人经历</h2>
+            <div class="relative pl-10">
+                <div class="timeline-item relative mb-10 fade-in">
+                    <div class="timeline-line"></div>
+                    <div class="glass dark:glass-dark rounded-xl p-6">
+                        <div class="font-semibold text-primaryDark">2023.09-至今</div>
+                        <p>本科｜华南农业大学 农学（丁颖创新班）</p>
+                    </div>
+                </div>
+                <div class="timeline-item relative mb-10 fade-in">
+                    <div class="timeline-line"></div>
+                    <div class="glass dark:glass-dark rounded-xl p-6">
+                        <div class="font-semibold text-primaryDark">2024.07-08</div>
+                        <p>泰国马哈沙拉堪大学 交流访学</p>
+                    </div>
+                </div>
+                <div class="timeline-item relative mb-10 fade-in">
+                    <div class="timeline-line"></div>
+                    <div class="glass dark:glass-dark rounded-xl p-6">
+                        <div class="font-semibold text-primaryDark">2025.07-08</div>
+                        <p>法国ISARA-Lyon农业中心 交流访学</p>
+                    </div>
+                </div>
+                <div class="timeline-item relative mb-10 fade-in">
+                    <div class="timeline-line"></div>
+                    <div class="glass dark:glass-dark rounded-xl p-6">
+                        <div class="font-semibold text-primaryDark">2026.01-2026.03</div>
+                        <p>隆平生物技术（海南）有限公司 实习生</p>
+                    </div>
+                </div>
+                <div class="timeline-item relative fade-in">
+                    <div class="glass dark:glass-dark rounded-xl p-6">
+                        <div class="font-semibold text-primaryDark">2026.09</div>
+                        <p>浙江大学生命科学学院 直博录取</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 科研经历 -->
+        <section id="research" class="fade-in mb-20">
+            <h2 class="text-2xl font-bold mb-10">科研经历</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass dark:glass-dark rounded-xl p-6">
+                    <h3 class="font-bold text-lg">课题一（共一第一）</h3>
+                    <p class="my-3">这里放你第一段科研内容</p>
+                    <a href="pdf/paper1.pdf" target="_blank" class="inline-block mt-3 text-primaryDark hover:underline">文章见刊PDF <i class="fa fa-external-link ml-1"></i></a>
+                </div>
+                <div class="glass dark:glass-dark rounded-xl p-6">
+                    <h3 class="font-bold text-lg">纳米氧化锌对种子胁迫缓解响应研究</h3>
+                    <p class="my-3">研究纳米氧化锌种子处理对不同基因型水稻种子在化感作用下萌发与幼苗建成的影响。</p>
+                    <a href="pdf/paper2.pdf" target="_blank" class="inline-block mt-3 text-primaryDark hover:underline">文章见刊PDF <i class="fa fa-external-link ml-1"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 奖项荣誉 -->
+        <section id="award" class="fade-in mb-20">
+            <h2 class="text-2xl font-bold mb-10">奖项荣誉</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass dark:glass-dark rounded-xl p-6 text-center">国家奖学金</div>
+                <div class="glass dark:glass-dark rounded-xl p-6 text-center">校级一等奖学金</div>
+                <div class="glass dark:glass-dark rounded-xl p-6 text-center">院士奖学金</div>
+                <div class="glass dark:glass-dark rounded-xl p-6 text-center">校优秀学生骨干</div>
+            </div>
+        </section>
+
+        <!-- 学生工作经历 -->
+        <section id="studentwork" class="fade-in mb-20">
+            <h2 class="text-2xl font-bold mb-10">学生工作经历</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass dark:glass-dark rounded-xl p-6">
+                    <h3 class="font-bold text-lg">【这里填你的学生工作标题1】</h3>
+                    <p>内容……</p>
+                </div>
+                <div class="glass dark:glass-dark rounded-xl p-6">
+                    <h3 class="font-bold text-lg">【这里填你的学生工作标题2】</h3>
+                    <p>内容……</p>
+                </div>
+                <div class="glass dark:glass-dark rounded-xl p-6 md:col-span-2">
+                    <h3 class="font-bold text-lg">大型志愿服务</h3>
+                    <p>1：中国进出口商品交易会志愿服务，负责外商的指引工作<br>2.广州马拉松志愿活动，负责参赛者指引引导以及存取衣服务</p>
+                    <img src="images/volunteer.jpg" alt="志愿服务照片" class="w-full mt-4 rounded-lg">
+                </div>
+            </div>
+        </section>
+
+        <!-- 个人技能 -->
+        <section id="skill" class="fade-in mb-20">
+            <h2 class="text-2xl font-bold mb-10">个人技能</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass dark:glass-dark rounded-xl p-6">
+                    <h3 class="font-semibold mb-2">软件工具</h3>
+                    <p>Office家族软件</p>
+                </div>
+                <div class="glass dark:glass-dark rounded-xl p-6">
+                    <h3 class="font-semibold mb-2">实验操作</h3>
+                    <p>各类植物生理、分子基础实验操作</p>
+                </div>
+                <div class="glass dark:glass-dark rounded-xl p-6 md:col-span-2">
+                    <h3 class="font-semibold mb-2">综合能力</h3>
+                    <p>推文制作、活动策划设计</p>
+                    <div class="mt-3 flex flex-wrap gap-4">
+                        <a href="https://mp.weixin.qq.com/s/4VmVbY7zQofnCbHyuOvwiA" target="_blank" class="text-primaryDark hover:underline">点击跳转推文作品1</a>
+                        <a href="https://mp.weixin.qq.com/s/FkZkkvYmvT3CaINUDgPUGw" target="_blank" class="text-primaryDark hover:underline">点击跳转推文作品2</a>
+                    </div>
+                </div>
+                <div class="glass dark:glass-dark rounded-xl p-6 md:col-span-2">
+                    <h3 class="font-semibold mb-2">项目经历</h3>
+                    <p>国家级大创，项目核心参与人</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系我 -->
+        <section id="contact" class="fade-in mb-10">
+            <h2 class="text-2xl font-bold mb-10">联系我</h2>
+            <div class="glass dark:glass-dark rounded-xl p-8">
+                <p>邮箱：xxx@xxx.com</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
+        © 2026 于湘怡 | 个人主页
+    </footer>
+
+    <script>
+        // 深色模式切换
+        const themeBtn = document.getElementById('themeBtn');
+        const htmlDom = document.documentElement;
+        if(localStorage.getItem('theme')==='dark') htmlDom.classList.add('dark');
+        themeBtn.onclick = ()=>{
+            htmlDom.classList.toggle('dark');
+            localStorage.setItem('theme', htmlDom.classList.contains('dark') ? 'dark':'light')
+        }
+
+        // 滚动淡入
+        const observer = new IntersectionObserver((entries)=>{
+            entries.forEach(item=>{
+                if(item.isIntersecting) item.target.classList.add('active')
+            })
+        },{threshold:0.1})
+        document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el))
+    </script>
+</body>
+</html>
+<!-- （注：内容由AI生成） -->
