@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>于湘怡 | 个人主页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --primary: #25A5A5;
+      --primary-light: #6DD5D5;
+      --accent: #A7DDE0;
+      --bg-page: #F5FAFA;
+      --bg-card: rgba(255,255,255,0.72);
+      --text-main: #1F3F3F;
+      --text-secondary: #5E7F7F;
+      --shadow: 0 18px 45px rgba(37,165,165,0.18);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --timeline-line:#c6d8e8;
+    }
+    [data-theme="dark"] {
+      --primary: #4ECDC4;
+      --primary-light: #7FE8E8;
+      --bg-page: #0F2C2C;
+      --bg-card: rgba(255,255,255,0.08);
+      --text-main: #E4F7F7;
+      --text-secondary: #A8C8C8;
+      --shadow: 0 18px 45px rgba(0,0,0,0.35);
+      --timeline-line:#3c4e66;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.7;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+    .fade-in{
+      opacity:0;
+      transform:translateY(24px);
+      transition:all 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .fade-in.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      padding: 12px 0;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.85);
+    }
+    [data-theme="dark"] nav {
+      background: rgba(15,44,44,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 15px;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: none;
+      font-size: 20px;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+    .nav-links-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 199;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .nav-links-mobile a {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+    }
+    .nav-links-mobile .close-menu {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .btn-solid {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.25s;
+      box-shadow: 0 8px 20px rgba(37,165,165,0.25);
+    }
+    .btn-solid:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(37,165,165,0.35);
+    }
+    .btn-outline {
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 10px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.25s;
+    }
+    .btn-outline:hover {
+      background: rgba(37,165,165,0.08);
+    }
+    .glass {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.85);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .card {
+      padding: 24px;
+      transition: 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 60px rgba(37,165,165,0.22);
+    }
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    section {
+      scroll-margin-top: 84px;
+    }
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 32px;
+      color: var(--text-main);
+      font-weight: 800;
+    }
+    .hero {
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(to bottom,
+          rgba(245,250,250,0.78),
+          rgba(245,250,250,0.96)),
+        url('lake.jpg');
+      background-size: cover;
+      background-position: center 10%;
+      background-repeat: no-repeat;
+    }
+    .hero-bg-blur {
+      position: absolute;
+      inset: 0;
+      background-image: url('lake.jpg');
+      background-size: cover;
+      background-position: center 10%;
+      filter: blur(8px) saturate(90%);
+      opacity: 0.55;
+      z-index: 0;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.05fr 1.35fr;
+      gap:40px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 20px;
+      color: var(--text-secondary);
+      margin-bottom:12px;
+    }
+    .hero-info p {
+      font-size: 16px;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .hero-info strong {
+      color: var(--primary);
+    }
+    .hero-img-group{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .hero-img{
+      width:100%;
+      aspect-ratio:4/5;
+      border-radius:var(--radius-sm);
+      overflow:hidden;
+      background:rgba(255,255,255,0.5);
+    }
+    .hero-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    /* 从关于我开始的柔和淡入过渡 */
+    .about-zone {
+      position: relative;
+      z-index: 2;
+      margin-top: -30px;
+      padding-top: 80px;
+      padding-bottom: 20px;
+      background:
+        linear-gradient(to bottom,
+          rgba(167,221,224,0.42) 0%,
+          rgba(167,221,224,0.25) 30%,
+          rgba(167,221,224,0.12) 55%,
+          rgba(245,250,250,1) 100%);
+      border-radius: 40px 40px 0 0;
+    }
+    .about-zone .container {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    /* 个人经历时间轴 */
+    .timeline-wrap{
+      position:relative;
+      padding-left:44px;
+    }
+    .timeline-wrap::before{
+      content:"";
+      position:absolute;
+      left:12px;
+      top:0;
+      bottom:0;
+      width:2px;
+      background:linear-gradient(to bottom,var(--primary),var(--accent));
+    }
+    .timeline-item{
+      position:relative;
+      margin-bottom:32px;
+      padding-left: 12px;
+    }
+    .timeline-dot{
+      position:absolute;
+      left:-38px;
+      top:4px;
+      width:24px;
+      height:24px;
+      border-radius:50%;
+      background-color:var(--bg-page);
+      border:2px solid var(--primary);
+    }
+    .timeline-time{
+      color:var(--primary);
+      font-weight:700;
+      margin-bottom:4px;
+    }
+    .timeline-text h4{
+      font-size: 17px;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+    .timeline-text p{
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    /* 科研经历卡片 */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 32px;
+    }
+    .research-card {
+      padding: 28px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 8px 24px rgba(37,165,165,0.12);
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.4s ease,
+                  border-color 0.4s ease;
+    }
+    .research-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(37,165,165,0.35);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.06),
+        0 20px 48px rgba(37,165,165,0.22);
+    }
+    .research-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+    .research-card .card-meta {
+      font-size: 14px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .research-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    /* 学生工作 */
+    .studentwork-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+      gap:32px;
+    }
+    .work-img-box{
+      width:100%;
+      height:220px;
+      margin-top:14px;
+      border-radius:var(--radius-sm);
+      overflow:hidden;
+      background:rgba(255,255,255,0.45);
+    }
+    .work-img-box img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    /* 获奖荣誉 */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .award-card {
+      padding: 18px;
+    }
+    .award-card h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .award-img-box {
+      width: 100%;
+      height: 160px;
+      margin-top: 0;
+      background: rgba(255,255,255,0.5);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .award-img-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+    .award-img-box img:hover {
+      transform: scale(1.02);
+    }
+
+    .paper-link{
+      margin-top:14px;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal img {
+      max-width: 95%;
+      max-height: 95vh;
+      border-radius: var(--radius-sm);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    .theme-toggle {
+      border: none;
+      background: none;
+      color: var(--text-main);
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .tag-group{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .tag {
+      background: rgba(37,165,165,0.08);
+      color: var(--primary);
+      border: 1px solid rgba(37,165,165,0.2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .work-link-item{
+      display:inline-block;
+      margin:6px 8px 6px 0;
+    }
+
+    /* 点击波纹：更大、更慢 */
+    #ripple-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .ripple-circle {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(37,165,165,0.55);
+      background: radial-gradient(circle, rgba(167,221,224,0.35), rgba(167,221,224,0) 70%);
+      transform: translate(-50%, -50%) scale(0.2);
+      animation: ripple-expand 1.6s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes ripple-expand {
+      0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(4.2);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .awards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .hero-wrap {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 36px;
+      }
+      .studentwork-grid{
+        grid-template-columns:1fr;
+      }
+      .hero-img-group{
+        gap:10px;
+      }
+      .timeline-wrap{
+        padding-left:32px;
+      }
+      .timeline-dot{
+        left:-28px;
+      }
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+      .awards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+    }
+    @media (max-width: 480px) {
+      .awards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="ripple-layer"></div>
+
+<div class="nav-links-mobile" id="mobileMenu">
+  <span class="close-menu" id="closeMenu">&times;</span>
+  <a href="#hero">首页</a>
+  <a href="#about">关于我</a>
+  <a href="#experience">个人经历</a>
+  <a href="#research">科研经历</a>
+  <a href="#awards">获奖荣誉</a>
+  <a href="#skills">个人技能</a>
+  <a href="#student-work">学生工作经历</a>
+  <a href="#contact">联系我</a>
+  <a href="./resume.pdf" class="btn-solid">下载简历PDF</a>
+  <button class="theme-toggle" id="themeBtnMobile">🌓</button>
+</div>
+
+<nav>
+  <div class="nav-wrap">
+    <div class="nav-logo">于湘怡</div>
+    <div class="nav-links">
+      <a href="#hero">首页</a>
+      <a href="#about">关于我</a>
+      <a href="#experience">个人经历</a>
+      <a href="#research">科研经历</a>
+      <a href="#awards">获奖荣誉</a>
+      <a href="#skills">个人技能</a>
+      <a href="#student-work">学生工作经历</a>
+      <a href="#contact">联系我</a>
+      <a href="./resume.pdf" class="btn-solid">下载简历PDF</a>
+      <button class="theme-toggle" id="themeBtn">🌓</button>
+    </div>
+    <button class="menu-toggle" id="menuBtn">☰</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-blur"></div>
+  <div class="container hero-inner">
+    <div class="hero-wrap">
+      <div>
+        <h1>于湘怡</h1>
+        <div class="hero-sub">个人主页</div>
+
+        <div class="hero-info">
+          <p><strong>爱好：</strong>游泳，羽毛球，做手工制品，编曲</p>
+          <p><strong>特长：</strong>播音主持，古筝</p>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <a href="#experience" class="btn-solid">查看经历</a>
+          <a href="./resume.pdf" class="btn-outline">下载简历</a>
+        </div>
+      </div>
+      <div class="hero-img-group">
+        <div class="hero-img glass">
+          <img src="photo1.jpg" alt="个人照片一">
+        </div>
+        <div class="hero-img glass">
+          <img src="photo2.jpg" alt="个人照片二">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 从关于我开始的柔和淡入过渡 -->
+<div class="about-zone">
+  <div class="container">
+    <h2 class="section-title">关于我</h2>
+    <div class="glass card fade-in">
+      <h3>教育背景</h3>
+      <p><strong>华南农业大学｜农学（丁颖创新班）</strong> 2023.09‑至今，GPA：4.37，综合排名 1/27</p>
+      <p>英语：CET‑4 635；CET‑6 582</p>
+      <br />
+      <p><strong>研究方向：</strong>水稻抗逆生理、植物生长调控、纳米生物效应、胞嘧啶碱基编辑</p>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title">个人经历</h2>
+    <div class="timeline-wrap">
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">2023.09‑至今</div>
+        <div class="timeline-text">
+          <h4>本科｜华南农业大学</h4>
+          <p>农学（丁颖创新班）就读</p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">2024.07‑08</div>
+        <div class="timeline-text">
+          <h4>交流访学｜马哈沙拉堪大学（泰国）</h4>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">2025.07‑08</div>
+        <div class="timeline-text">
+          <h4>交流访学｜法国ISARA‑Lyon农业中心</h4>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">2026.01‑2026.03</div>
+        <div class="timeline-text">
+          <h4>实习生｜隆平生物技术（海南）有限公司</h4>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">2026.09</div>
+        <div class="timeline-text">
+          <h4>直博录取｜浙江大学生命科学学院</h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="container">
+    <h2 class="section-title">科研经历</h2>
+
+    <div class="research-grid">
+      <div class="research-card fade-in">
+        <h3>香稻秧苗移栽损伤调控研究</h3>
+        <div class="card-meta">2026.01｜共一第一作者 Frontiers in Plant Science</div>
+        <p>探究植物生长调节剂与矿质叶面肥对模拟移栽损伤香稻幼苗修复效应。</p>
+        <div class="paper-link">
+          <a class="btn-outline" target="_blank" href="paper1.pdf">📄文章见刊PDF</a>
+        </div>
+      </div>
+
+      <div class="research-card fade-in">
+        <h3>纳米氧化锌对种子胁迫缓解响应研究</h3>
+        <div class="card-meta">2026.03｜第三作者 Plant Cell Reports</div>
+        <p>研究纳米氧化锌种子处理对不同基因型水稻种子在化感作用下萌发与幼苗建成的影响。</p>
+        <div class="paper-link">
+          <a class="btn-outline" target="_blank" href="paper2.pdf">📄文章见刊PDF</a>
+        </div>
+      </div>
+
+      <div class="research-card fade-in">
+        <h3>国家级大创：纳米材料生物功能鉴定</h3>
+        <div class="card-meta">2023.11｜项目核心参与人，优秀结题</div>
+        <p>负责实验执行、数据分析处理。</p>
+      </div>
+
+      <div class="research-card fade-in">
+        <h3>新型胞嘧啶碱基编辑工具开发</h3>
+        <div class="card-meta">2026.03‑至今｜项目参与人</div>
+        <p>水稻苗鉴定，酶氨基酸点突变设计，数据处理。</p>
+      </div>
+
+      <div class="research-card fade-in">
+        <h3>拔尖计划合成生物学课程</h3>
+        <div class="card-meta">2025.03‑05｜成绩A+</div>
+        <p>《Synthetic biology: produce fuels, chemicals and pharmaceuticals in microorganisms》</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="awards">
+  <div class="container">
+    <h2 class="section-title">获奖 & 荣誉</h2>
+
+    <div class="awards-grid">
+      <div class="glass card award-card fade-in">
+        <h3>国家奖学金</h3>
+        <div class="award-img-box">
+          <img src="award1.jpg" alt="奖状预览" class="award-pic">
+        </div>
+      </div>
+      <div class="glass card award-card fade-in">
+        <h3>校级一等奖学金</h3>
+        <div class="award-img-box">
+          <img src="award2.jpg" alt="奖状预览" class="award-pic">
+        </div>
+      </div>
+      <div class="glass card award-card fade-in">
+        <h3>院士奖学金</h3>
+        <div class="award-img-box">
+          <img src="award3.jpg" alt="奖状预览" class="award-pic">
+        </div>
+      </div>
+      <div class="glass card award-card fade-in">
+        <h3>校优秀学生骨干</h3>
+        <div class="award-img-box">
+          <img src="award4.jpg" alt="奖状预览" class="award-pic">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">个人技能</h2>
+    <div class="glass card fade-in">
+      <h4>实验操作</h4>
+      <div class="tag-group">
+        <span class="tag">PCR</span>
+        <span class="tag">凝胶电泳</span>
+        <span class="tag">抗逆酶活性测定</span>
+      </div>
+      <br />
+      <h4>软件工具</h4>
+      <div class="tag-group">
+        <span class="tag">Origin</span>
+        <span class="tag">Statistix</span>
+        <span class="tag">SnapGene</span>
+        <span class="tag">Zotero</span>
+        <span class="tag">Office家族软件</span>
+      </div>
+      <br />
+      <h4>综合实践能力</h4>
+      <div class="tag-group">
+        <span class="tag">推文制作</span>
+        <span class="tag">活动策划设计</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="student-work">
+  <div class="container">
+    <h2 class="section-title">学生工作经历</h2>
+    <div class="studentwork-grid">
+      <div class="glass card fade-in">
+        <h3>2023.10‑2026.07 农学院新媒体中心｜干事‑负责人‑主任</h3>
+        <ul style="padding-left:20px;margin-top:12px;">
+          <li>负责学院双公众号平台日常宣传运营，统筹易班工作站内容管理工作。</li>
+          <li>协助学院讲座、各类校园活动开展，承担现场组织、影像记录与素材拍摄工作。</li>
+          <li>对接学院领导与各学生部门，完成工作事项传达、信息同步与通知发布，保障部门协同运转。</li>
+        </ul>
+        <div style="margin-top:18px;">
+          <p style="margin-bottom:8px;color:var(--text-secondary);">参与审核、编辑制作的推文作品：</p>
+          <a class="btn-outline work-link-item" target="_blank" href="https://mp.weixin.qq.com/s/4VmVbY7zQofnCbHyuOvwiA">点击跳转推文作品</a>
+          <a class="btn-outline work-link-item" target="_blank" href="https://mp.weixin.qq.com/s/FkZkkvYmvT3CaINUDgPUGw">点击跳转推文作品</a>
+        </div>
+      </div>
+
+      <div class="glass card fade-in">
+        <h3>2024.07‑2026.07 学院招生宣传中心｜干事‑负责人</h3>
+        <ul style="padding-left:20px;margin-top:12px;">
+          <li>对接学校招生宣传职能部门，落实并向下传达各项招生工作部署；统筹管理学院招生宣传大使队伍，承担成员指导、日常管理、考核评优相关工作。</li>
+          <li>牵头落实学院高考阶段招生宣传的各项策划、组织与落地实施工作。</li>
+        </ul>
+      </div>
+
+      <div class="glass card fade-in">
+        <h3>2024.07‑2026.08 新生心理辅导员‑助理班主任</h3>
+        <ul style="padding-left:20px;margin-top:12px;">
+          <li>协助新生完成入学适应、学籍办理等大学阶段衔接相关事务，做好新生过渡引导。</li>
+          <li>承担班级日常管理工作，组织开展主题班会，为新生提供学业、生活等多方面答疑解惑，做好日常引导与帮扶。</li>
+        </ul>
+        <div class="work-img-box">
+          <img src="assistant-teacher.jpg" alt="助理班主任照片">
+        </div>
+      </div>
+
+      <div class="glass card fade-in">
+        <h3>大型志愿服务</h3>
+        <ul style="padding-left:20px;margin-top:12px;">
+          <li>中国进出口商品交易会志愿服务，承担外商来访指引服务工作。</li>
+          <li>广州马拉松志愿活动，负责参赛者指引引导、存取衣物相关服务保障。</li>
+        </ul>
+        <div class="work-img-box">
+          <img src="volunteer.jpg" alt="志愿服务照片">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">联系我</h2>
+    <div class="glass card fade-in">
+      <div class="contact-item">📩邮箱：yuxiangyi_judy@163.com</div>
+      <div class="contact-item">📞电话：15723197758</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 于湘怡｜个人主页，仅用于个人展示
+</footer>
+
+<div class="modal" id="imgModal">
+  <span class="modal-close">&times;</span>
+  <img id="modalImg" src="" alt="奖状大图">
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(item=>{
+      if(item.isIntersecting){
+        item.target.classList.add("active");
+      }
+    })
+  },{threshold:0.1});
+  document.querySelectorAll(".fade-in").forEach(el=>io.observe(el));
+
+  const menuBtn = document.getElementById("menuBtn");
+  const closeMenu = document.getElementById("closeMenu");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.style.display = "flex";
+  });
+  closeMenu.addEventListener("click", () => {
+    mobileMenu.style.display = "none";
+  });
+  mobileMenu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      mobileMenu.style.display = "none";
+    });
+  });
+
+  const themeBtn = document.getElementById("themeBtn");
+  const themeBtnMobile = document.getElementById("themeBtnMobile");
+  function toggleTheme() {
+    const d = document.documentElement;
+    if (d.dataset.theme === "dark") {
+      delete d.dataset.theme;
+      localStorage.setItem("siteTheme","light");
+    } else {
+      d.dataset.theme="dark";
+      localStorage.setItem("siteTheme","dark");
+    }
+  }
+  themeBtn.addEventListener("click", toggleTheme);
+  themeBtnMobile.addEventListener("click", toggleTheme);
+  if(localStorage.getItem("siteTheme")==="dark") document.documentElement.dataset.theme="dark";
+
+  const modal = document.getElementById("imgModal");
+  const modalImg = document.getElementById("modalImg");
+  document.querySelectorAll(".award-pic").forEach(img=>{
+    img.onclick=function(){
+      modal.style.display="flex";
+      modalImg.src=this.src;
+    }
+  })
+  document.querySelector(".modal-close").onclick=()=>modal.style.display="none";
+  modal.onclick=(e)=>{if(e.target===modal) modal.style.display="none";}
+
+  // 点击波纹效果
+  const rippleLayer = document.getElementById("ripple-layer");
+  document.addEventListener("click", function(e) {
+    const ripple = document.createElement("span");
+    ripple.classList.add("ripple-circle");
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top = e.clientY + "px";
+    rippleLayer.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 1600);
+  });
+</script>
+
+</body>
+</html>
+<!-- （注：内容由AI生成） -->
